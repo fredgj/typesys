@@ -5,7 +5,7 @@ Typesys
 Intro
 -----
 
-Typesys is a module that is meant to make it more easy to manange types.
+Typesys is a module that is meant to make it more easy to manage types.
 It contains three decorators; type_hints, type_corrector, and return_type.
 
 The type_hints decorator lets the user specify what the arguements of
