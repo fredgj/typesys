@@ -54,26 +54,26 @@ the examples below
     
     # a and b must be integers
     @type_hints(int, int)
-    def hint_add(a, b):
+    def add(a, b):
         """Adds two numbers"""
         return a+b
 
 
     @type_hints(int, int)
-    def def_add(a, b=0):
+    def add(a, b=0):
         return a+b
 
     # accepts bot integers and floats as arguments
     @type_hints(int, float)
-    def hint_mult(*numbers):
+    def mult(*numbers):
         result = 1
         for num in numbers:
             result *= num
         return result
 
-
-    @type_hints(int, float)
-    def hint_kw_mult(**kwargs):
+    # Only accept integer arguments
+    @type_hints(int)
+    def mult(**kwargs):
         first = kwargs.get('first')
         second = kwargs.get('second')
         third = kwargs.get('third')    
