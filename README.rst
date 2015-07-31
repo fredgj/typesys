@@ -36,7 +36,7 @@ pip install typesys
 Usage
 -----
 
-First import the decorators from the typecorrector module:
+First import the decorators from the typesys module:
 
 .. code:: python
 
