@@ -137,7 +137,7 @@ allows some margin of error.
 
 
 return_type
------------
+'''''''''''
 
 Decorate your functions with the type or types you want your functions to
 return, as shown in the examples below.
