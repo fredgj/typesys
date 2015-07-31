@@ -34,23 +34,23 @@ class _TypeChecker(object):
     # Loops through the objects and types and checks that they are the same.
     # This is done when a function has "regular" or default arguements, meaning
     # defined as eiter func(x,y) or func(x=None, y=None)
-    def multi_type_check(self):
+    def type_check(self):
         # default arguements goes here
         if self.arg_names:
-            zipped = zip(self.objects, self.types, self.arg_names)
-            for obj, _type, arg_name in zipped:
+            data = zip(self.objects, self.types, self.arg_names)
+            for obj, _type, arg_name in data:
                 self._check_type(obj, _type, arg_name=arg_name)
         # Regular arguments goes here
         else:
-            zipped = zip(self.objects, self.types)
-            for count, (obj, _type) in enumerate(zipped):
+            data = zip(self.objects, self.types)
+            for count, (obj, _type) in enumerate(data):
                 self._check_type(obj, _type, arg_num=count)
     
     # Loops through the objects and check that it is of one of the types from
     # types.
     # This is used when a function has been defined with an arbitrary number of
     # of arguments (*args) or keyword arguemnts (**kwargs)
-    def args_type_check(self):
+    def arbitrary_type_check(self):
         # **kwargs goes here
         if self.arg_names:
             data = zip(self.objects, self.arg_names)
@@ -136,13 +136,13 @@ def type_hints(*types):
                                               arg_names=kwargs.keys())
                 
                 if inspect.getargspec(func).args and args:
-                    args_checker.multi_type_check()
+                    args_checker.type_check()
                 if inspect.getargspec(func).defaults:
-                    kwargs_checker.multi_type_check()
+                    kwargs_checker.type_check()
                 if inspect.getargspec(func).varargs:
-                    args_checker.args_type_check()
+                    args_checker.arbitrary_type_check()
                 if inspect.getargspec(func).keywords:
-                    kwargs_checker.args_type_check()
+                    kwargs_checker.arbitrary_type_check()
                 
                 return func(*args, **kwargs)
             except TypeError as te:
