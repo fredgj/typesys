@@ -1,5 +1,5 @@
-Type corrector
-==============
+Typesys
+=======
 
 
 Intro
