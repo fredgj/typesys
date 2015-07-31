@@ -9,7 +9,6 @@ from functools import wraps
 ########################################################
 
 
-
 # This is a class to hold the objects and types for type hints.
 # Also need the decorated functions name in order to give better
 # debug messages when an TypeError is raised. If the decorated function
@@ -94,6 +93,7 @@ def _single_type_fix(obj_seq, _type):
 #####################################
 # Below are the actual decorators   #
 #####################################
+
 
 def type_corrector(*types):
     """A decorator that casts the parameters of a function to the types
