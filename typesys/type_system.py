@@ -110,9 +110,9 @@ def type_corrector(*types):
             kwargs_values = _multi_type_fix(kwargs.values(), kw_types) if len(kw_types) > 1 \
                     else _single_type_fix(kwargs.values(), types[0])
            
-            zipped = zip(kwargs.keys(), kwargs_values)
-            for key, value in zipped:
-                kwargs[key] = value
+            data = zip(kwargs.keys(), kwargs_values)
+            for name, value in data:
+                kwargs[name] = value
                 
             return func(*args, **kwargs)
         return func_wrapper
@@ -131,7 +131,10 @@ def type_hints(*types):
                 arg_types = types[0:len(args)]
                 kw_types = types[len(args):len(types)]
                 args_checker = _TypeChecker(args, arg_types, func.__name__)
-                kwargs_checker = _TypeChecker(kwargs.values(), kw_types, func.__name__, arg_names=kwargs.keys())
+                kwargs_checker = _TypeChecker(kwargs.values(), 
+                                              kw_types, func.__name__, 
+                                              arg_names=kwargs.keys())
+                
                 if inspect.getargspec(func).args and args:
                     args_checker.multi_type_check()
                 if inspect.getargspec(func).defaults:
@@ -140,6 +143,7 @@ def type_hints(*types):
                     args_checker.args_type_check()
                 if inspect.getargspec(func).keywords:
                     kwargs_checker.args_type_check()
+                
                 return func(*args, **kwargs)
             except TypeError as te:
                 print('TypeError: {}'.format(te))
