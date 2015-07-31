@@ -40,7 +40,7 @@ First import the decorators from the typecorrector module:
 
 .. code:: python
 
-    from typecorrector import type_hints, type_corrector, return_type
+    from typesys import type_hints, type_corrector, return_type
 
 Then you can decorate your functions with these decorators
 
