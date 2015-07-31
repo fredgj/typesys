@@ -8,57 +8,6 @@ from functools import wraps
 # is documented with docstrings                        #
 ########################################################
 
-# cast an object to a type if the
-# object passed in is not of the same
-# type as the type passed in. This might result
-# in a ValueError or TypeError.
-def _correct_type(obj, _type):
-    if type(obj) != _type:
-        obj = _type(obj)
-    return obj
-
-
-# Pairs each object and type as tuples in a list,
-# then loops through this list and yields each object,
-# if possible, after we have made sure the object 
-# has the same type as the type in its tuple.
-def _multi_type_fix(obj_seq, type_seq):
-    zipped = zip(obj_seq, type_seq)
-    for obj, _type in zipped:
-        yield _correct_type(obj, _type)
-
-
-# Loops true a sequence of objects and yields
-# each object, if possible, after we have made sure
-# the object has the same type as the type passed in
-# as an argument.
-def _single_type_fix(obj_seq, _type):
-    for obj in obj_seq:
-        yield _correct_type(obj, _type)
-
-
-def type_corrector(*types):
-    """A decorator that casts the parameters of a function to the types
-       used as arguments with this decorator. If the decorated function
-       have *args and/or **kwargs as its paramenters the user only need
-       to specify one type as arguments to this decorator."""
-    def wrapper(func):
-        @wraps(func)
-        def func_wrapper(*args, **kwargs):
-            args_types = types[0:len(types)]
-            kw_types = types[len(args):len(args)]
-            args = _multi_type_fix(args, args_types) if len(args_types) > 1 \
-                    else _single_type_fix(args, types[0])
-            kwargs_values = _multi_type_fix(kwargs.values(), kw_types) if len(kw_types) > 1 \
-                    else _single_type_fix(kwargs.values(), types[0])
-           
-            zipped = zip(kwargs.keys(), kwargs_values)
-            for key, value in zipped:
-                kwargs[key] = value
-                
-            return func(*args, **kwargs)
-        return func_wrapper
-    return wrapper
 
 
 # This is a class to hold the objects and types for type hints.
@@ -115,6 +64,59 @@ class _TypeChecker(object):
             if type(obj) not in self.types:
                 raise TypeError('Expected one of these types {} as argument '\
                         'number {} in function {}, but found {}'.format(self.types, count, self.func_name, type(obj)))
+
+                                
+# cast an object to a type if the
+# object passed in is not of the same
+# type as the type passed in. This might result
+# in a ValueError or TypeError.
+def _correct_type(obj, _type):
+    if type(obj) != _type:
+        obj = _type(obj)
+    return obj
+
+
+# Generates all objects of the desired type
+# found in the types sequence
+def _multi_type_fix(obj_seq, type_seq):
+    zipped = zip(obj_seq, type_seq)
+    for obj, _type in zipped:
+        yield _correct_type(obj, _type)
+
+
+# Generates all objects of the desired type
+# passed in as _type
+def _single_type_fix(obj_seq, _type):
+    for obj in obj_seq:
+        yield _correct_type(obj, _type)
+
+
+#####################################
+# Below are the actual decorators   #
+#####################################
+
+def type_corrector(*types):
+    """A decorator that casts the parameters of a function to the types
+       used as arguments with this decorator. If the decorated function
+       have *args and/or **kwargs as its paramenters the user only need
+       to specify one type as arguments to this decorator."""
+    def wrapper(func):
+        @wraps(func)
+        def func_wrapper(*args, **kwargs):
+            args_types = types[0:len(types)]
+            kw_types = types[len(args):len(args)]
+            args = _multi_type_fix(args, args_types) if len(args_types) > 1 \
+                    else _single_type_fix(args, types[0])
+            kwargs_values = _multi_type_fix(kwargs.values(), kw_types) if len(kw_types) > 1 \
+                    else _single_type_fix(kwargs.values(), types[0])
+           
+            zipped = zip(kwargs.keys(), kwargs_values)
+            for key, value in zipped:
+                kwargs[key] = value
+                
+            return func(*args, **kwargs)
+        return func_wrapper
+    return wrapper
 
 
 def type_hints(*types):
