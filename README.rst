@@ -13,8 +13,9 @@ a functions should be. If arguments of another type than specified in the
 decorator are passed in, a TypeError will be raised.
 
 The type_corrector decorator lets the user specify what types the 
-arguments to a function should have. It's not 100% safe to use as it
-might result in a ValueError or TypeError if the user is not careful enough.
+arguments to a function should have, but not necessarily are passed in as,
+which means it allows some margin of error. It's not 100% safe to use as it
+still might result in a ValueError or TypeError if the user isn't careful enough.
 
 The return_type decorator lets the user specify what type the decoratred
 function should return. A TypeError will be raised if the function tries to 
