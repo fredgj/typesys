@@ -79,10 +79,10 @@ the examples below
     # Only accept integer arguments
     @type_hints(int)
     def mult(**kwargs):
-        first = kwargs.get('first')
-        second = kwargs.get('second')
-        third = kwargs.get('third')    
-        return first * second * third
+        x = kwargs.get('x')
+        y = kwargs.get('y')
+        z = kwargs.get('z')    
+        return x * y * z
 
 
   
