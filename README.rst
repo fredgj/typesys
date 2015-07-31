@@ -58,9 +58,11 @@ the examples below
         return a+b
 
 
-    @type_hints(int, int)
+    # also work with default arguments
+    @type_hints(int, float)
     def add(a, b=0):
         return a+b
+
 
     # accepts bot integers and floats as arguments
     @type_hints(int, float)
@@ -69,6 +71,7 @@ the examples below
         for num in numbers:
             result *= num
         return result
+
 
     # Only accept integer arguments
     @type_hints(int)
@@ -148,6 +151,7 @@ return, as shown in the examples below.
     @return_type(int, float, complex)
     def add(x,y):
         return x+y
+
 
     # only accept integers to be returned
     @return_type(int)
