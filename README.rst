@@ -64,7 +64,7 @@ the examples below
         return a+b
 
 
-    # accepts bot integers and floats as arguments
+    # accepts both integers and floats as arguments
     @type_hints(int, float)
     def mult(*numbers):
         result = 1
