@@ -5,7 +5,7 @@ __doc__ = open('README.rst').read()
 __description__ = 'typesys is a python module meant to make it easier to manange types'
 
 setup(name='typesys',
-      version='0.2.3',
+      version='0.2.4',
       description=__description__,
       long_description=__doc__,
       author=__author__,
