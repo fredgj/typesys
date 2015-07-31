@@ -15,14 +15,16 @@ decorator are passed in, a TypeError will be raised.
 The type_corrector decorator lets the user specify what types the 
 arguments to a function should have. It's not 100% safe to use as it
 might result in a ValueError or TypeError if the user is not careful enough.
-The motivation behing this module was to find a way that makes it easier
-for the programmer to see what types the arguments should be, and at 
-the same time allow some margin of error.
 
 The return_type decorator lets the user specify what type the decoratred
 function should return. A TypeError will be raised if the function tries to 
 return a value of another type. 
 
+The motivation behing this module was to abstract some of the type checking and
+type casting to a higher level. I wanted to find a way that makes it easier
+for the programmer to see what types the arguments should be, what a type
+a function should return, and at the same time allow some margin of error (in
+case of type_corrector).
 I'm not sure whether this is a good idea or not, or if it's a good approach.
 It was mostly developed for fun while playing around with decorators.
 
