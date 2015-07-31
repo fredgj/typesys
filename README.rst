@@ -146,7 +146,7 @@ return, as shown in the examples below.
 
 .. code:: python
     
-    # aceppts both integers, float and complex numbers
+    # accepts both integers, float and complex numbers
     # to be returned
     @return_type(int, float, complex)
     def add(x,y):
