@@ -47,7 +47,7 @@ Then you can decorate your functions with these decorators
 type_hints
 ''''''''''
 
-Decorate your functions with the types you want the arguments to be as shown in
+Decorate your functions with the types you want the arguments to be as, shown in
 the examples below
 
 .. code:: python
