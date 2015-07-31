@@ -80,9 +80,8 @@ class _TypeChecker(object):
             if arg_num is not None:
                 raise TypeError('Expected {} as argument number {} in function "{}" '\
                     ', but found {}'.format(_type, arg_num, self.func_name, type(obj)))
-            else:
-                raise TypeError('Expected {} as argument "{}" in function "{}" '\
-                    ', but found {}'.format(_type, arg_name, self.func_name, type(obj)))
+            raise TypeError('Expected {} as argument "{}" in function "{}" '\
+                ', but found {}'.format(_type, arg_name, self.func_name, type(obj)))
 
     # Loops through the objects and types and checks that they are the same.
     # This is done when a function has "regular" or default arguements, meaning
@@ -112,11 +111,10 @@ class _TypeChecker(object):
                     raise TypeError('Expected one of these types {} as argument '\
                             '"{}" in function {}, but found {}'.format(self.types, arg_name, self.func_name, type(obj)))
         # *args goes here
-        else:
-            for count, obj in enumerate(self.objects):
-                if type(obj) not in self.types:
-                    raise TypeError('Expected one of these types {} as argument '\
-                            'number {} in function {}, but found {}'.format(self.types, count, self.func_name, type(obj)))
+        for count, obj in enumerate(self.objects):
+            if type(obj) not in self.types:
+                raise TypeError('Expected one of these types {} as argument '\
+                        'number {} in function {}, but found {}'.format(self.types, count, self.func_name, type(obj)))
 
 
 def type_hints(*types):
@@ -162,7 +160,7 @@ def return_type(*types):
                 else:
                     return ret_val   
             except Exception as e:
-                print e 
+                print(e) 
         return func_wrapper
     return wrapper
 
