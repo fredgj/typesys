@@ -8,9 +8,9 @@ Intro
 Typesys is a module that is meant to make it more easy to manange types.
 It contains three decorators; type_hints, type_corrector, and return_type.
 
-The type_hints decorator lets the user specify what what the arguements of
+The type_hints decorator lets the user specify what the arguements of
 a functions should be. If arguments of another type than specified in the
-decorator if passed in, a TypeError will be raised.
+decorator are passed in, a TypeError will be raised.
 
 The type_corrector decorator lets the user specify what types the 
 arguments to a function should have. It's not 100% safe to use as it
@@ -42,12 +42,12 @@ First import the decorators from the typecorrector module:
 
     from typesys import type_hints, type_corrector, return_type
 
-Then you can decorate your functions with these decorators
+Then you are ready to start decorating your functions.
 
 type_hints
 ''''''''''
 
-Decorate your functions with the types you want the arguments to be as, shown in
+Decorate your functions with the types you want the arguments to be, as shown in
 the examples below
 
 .. code:: python
@@ -86,8 +86,8 @@ the examples below
 type_corrector
 ''''''''''''''
 
-Decorate your function with the types you want the arguments to be, but not
-necessary are passed in as, as shown in the examples below.
+Decorate your functions with the types you want the arguments to be treated as, 
+but not necessarily are passed in as, as shown in the examples below.
 
 .. code:: python
 
@@ -120,21 +120,21 @@ This decorator also works with \*args and \*\*kwargs
 
     @type_corrector(int)
     def kw_mult(**kwargs):
-        first = kwargs.get('first')
-        second = kwargs.get('second')
-        third = kwargs.get('third')
-        return first * second * third
+        x = kwargs.get('x')
+        y = kwargs.get('y')
+        z = kwargs.get('z')
+        return x * y * z
 
 
 This allows us to call the functions like this:
 
-- mult('2', '3', '4') 
-- kw_mult(first='2', second='3', third='4')
+- mult(2, '3', '4') 
+- kw_mult(x=2, y='3', z='4')
 
 When looking at the function definitions of add, mult and kw_mult we can easily
 see that the arguments are supposed to be integers.
-By decorating the functions like this it should be a clear
-hint what types we want the parameters to be passed in as, even though it 
+By decorating the functions like this it should also be a clear
+hint what types we want the arguments to be passed in as, even though it 
 allows some margin of error.
 
 
@@ -163,7 +163,7 @@ Known issues
 
 - When calling help on a decorated function the parameters are not shown
   correctly, instead it will just say <function name>(\*args, \*\*kwargs).
-  Thanks to the functools.wraps decorator the docstring of a wrapped function
+  Thanks to the functools.wraps decorator the docstring of a decorated function
   will still be shown correctly.
 - When using the inspect module to get the argument specification with
   inspect.getargspec or getting the source code from inspect.getsourcelines
