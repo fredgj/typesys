@@ -55,7 +55,6 @@ the examples below
     # a and b must be integers
     @type_hints(int, int)
     def add(a, b):
-        """Adds two numbers"""
         return a+b
 
 
