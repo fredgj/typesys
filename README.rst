@@ -60,7 +60,7 @@ the examples below
 
     # also work with default arguments
     @type_hints(int, float)
-    def add(a, b=0):
+    def add(a, b=0.0):
         return a+b
 
 
