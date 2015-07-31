@@ -1,7 +1,6 @@
 import inspect
 from functools import wraps
 
-
 ########################################################
 # Everything that are meant to be used within this     #
 # module only is documented with '#', everything else  #
