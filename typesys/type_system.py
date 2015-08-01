@@ -1,6 +1,7 @@
 import inspect
 from functools import wraps
 
+
 ########################################################
 # Everything that are meant to be used within this     #
 # module only is documented with '#', everything else  #
@@ -24,14 +25,13 @@ class _TypeChecker(object):
     # raises TypeError of not.
     def _check_type(self, obj, _type, arg_num=None, arg_name=None):
         if type(obj) != _type:
-            if arg_num is not None:
-                raise TypeError('Expected {} as argument number {} in function "{}" '\
-                    ', but found {}'.format(_type, arg_num, self.func_name, type(obj)))
-            raise TypeError('Expected {} as argument "{}" in function "{}" '\
-                ', but found {}'.format(_type, arg_name, self.func_name, type(obj)))
-
-    # Loops through the objects and types and checks that they are the same.
-    # This is done when a function has "regular" or default arguements, meaning
+            if arg_num:
+                raise TypeError('Expected {} as argument "{}" in function "{}" '\
+                    ', but found {}'.format(_type, arg_name, self.func_name, type(obj)))
+            raise TypeError('Expected {} as argument number {} in function "{}" '\
+                ', but found {}'.format(_type, arg_num, self.func_name, type(obj)))
+    
+    # This is called when a function has "regular" or default arguements, meaning
     # defined as eiter func(x,y) or func(x=None, y=None)
     def type_check(self):
         # default arguements goes here
@@ -45,28 +45,24 @@ class _TypeChecker(object):
             for count, (obj, _type) in enumerate(data):
                 self._check_type(obj, _type, arg_num=count)
     
-    # Loops through the objects and check that it is of one of the types from
-    # types.
-    # This is used when a function has been defined with an arbitrary number of
+    # This is called when a function has been defined with an arbitrary number of
     # of arguments (*args) or keyword arguemnts (**kwargs)
     def arbitrary_type_check(self):
         # **kwargs goes here
-        if self.arg_names:
-            data = zip(self.objects, self.arg_names)
-            for obj, arg_name in data:
+        if self.arg_names: 
+            for obj, arg_name in zip(self.objects, self.arg_names):
                 if type(obj) not in self.types:
                     raise TypeError('Expected one of these types {} as argument '\
                             '"{}" in function {}, but found {}'.format(self.types, arg_name, self.func_name, type(obj)))
-        # *args goes here
-        for count, obj in enumerate(self.objects):
-            if type(obj) not in self.types:
-                raise TypeError('Expected one of these types {} as argument '\
+        else:
+            # *args goes here
+            for count, obj in enumerate(self.objects):
+                if type(obj) not in self.types:
+                    raise TypeError('Expected one of these types {} as argument '\
                         'number {} in function {}, but found {}'.format(self.types, count, self.func_name, type(obj)))
 
-                                
-# cast an object to a type if the
-# object passed in is not of the same
-# type as the type passed in. This might result
+
+# Selfdocumented, but might result
 # in a ValueError or TypeError.
 def _correct_type(obj, _type):
     if type(obj) != _type:
@@ -76,9 +72,8 @@ def _correct_type(obj, _type):
 
 # Generates all objects of the desired type
 # found in the types sequence
-def _multi_type_fix(obj_seq, type_seq):
-    zipped = zip(obj_seq, type_seq)
-    for obj, _type in zipped:
+def _multi_type_fix(obj_seq, type_seq): 
+    for obj, _type in zip(obj_seq, type_seq):
         yield _correct_type(obj, _type)
 
 
