@@ -80,8 +80,11 @@ the examples below
     @type_hints(int)
     def mult(**kwargs):
         x = kwargs.get('x')
+        x = 1 if x is None else x
         y = kwargs.get('y')
-        z = kwargs.get('z')    
+        y = 1 if y is None else y
+        z = kwargs.get('z')
+        z = 1 if z is None else z
         return x * y * z
 
 
@@ -122,11 +125,14 @@ This decorator also works with \*args and \*\*kwargs
 
 
     @type_corrector(int)
-    def kw_mult(**kwargs):
+    def mult(**kwargs):
         x = kwargs.get('x')
+        x = 1 if x is None else x
         y = kwargs.get('y')
+        y = 1 if y is None else y
         z = kwargs.get('z')
-        return x * y * z
+        z = 1 if z is None else z
+        return x * y * z   
 
 
 This allows us to call the functions like this:
@@ -160,6 +166,48 @@ return, as shown in the examples below.
     @return_type(int)
     def strict_add(x,y):
         return x+y
+
+
+The same applies for functions defines with \*args or \*\*kwargs
+
+.. code:: python
+
+    @return_type(int, float)
+    def mult(*numbers):
+        res = 1
+        for number in numbers:
+            res *= number
+        return res
+
+    
+    @return_type(int)
+    def stric_mult(*numbers):
+        res = 1
+        for number in numbers:
+            res *= number
+        return res
+
+
+    @return_type(int, float)
+    def kw_mult(**kwargs):
+        x = kwargs.get('x')
+        x = 1 if x is None else x
+        y = kwargs.get('y')
+        y = 1 if y is None else y
+        z = kwargs.get('z')
+        z = 1 if z is None else z
+        return x * y * z
+
+    
+    @return_type(int)
+    def stric_kw_mult(**kwargs):
+        x = kwargs.get('x')
+        x = 1 if x is None else x
+        y = kwargs.get('y')
+        y = 1 if y is None else y
+        z = kwargs.get('z')
+        z = 1 if z is None else z
+        return x * y * z
 
 Known issues
 ------------
