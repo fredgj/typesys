@@ -169,7 +169,7 @@ return, as shown in the examples below.
         return x+y
 
 
-The same applies for functions defines with \*args or \*\*kwargs
+The same applies for functions defined with \*args and/or \*\*kwargs
 
 .. code:: python
 
