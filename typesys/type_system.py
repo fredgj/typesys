@@ -165,3 +165,16 @@ def return_type(*types):
     return wrapper
 
 
+def returns(ttype):
+    """return_type_corrector takes one argument, they type you
+       want your decorated function to return, and the function will
+       return a value of this type (if possible)"""
+    def wrapper(func):
+        @wraps(func)
+        def func_wrapper(*args, **kwargs):
+            ret_val = func(*args, **kwargs)
+            return ttype(ret_val)
+        return func_wrapper
+    return wrapper
+
+
