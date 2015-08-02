@@ -27,9 +27,15 @@ class _TypeChecker(object):
         if type(obj) != _type:
             if arg_num:
                 raise TypeError('Expected {} as argument "{}" in function "{}" '\
-                    ', but found {}'.format(_type, arg_name, self.func_name, type(obj)))
+                    ', but found {}'.format(_type, 
+                                            arg_name, 
+                                            self.func_name, 
+                                            type(obj)))
             raise TypeError('Expected {} as argument number {} in function "{}" '\
-                ', but found {}'.format(_type, arg_num, self.func_name, type(obj)))
+                ', but found {}'.format(_type, 
+                                        arg_num, 
+                                        self.func_name, 
+                                        type(obj)))
     
     # This is called when a function has "regular" or default arguements, meaning
     # defined as eiter func(x,y) or func(x=None, y=None)
@@ -53,13 +59,19 @@ class _TypeChecker(object):
             for obj, arg_name in zip(self.objects, self.arg_names):
                 if type(obj) not in self.types:
                     raise TypeError('Expected one of these types {} as argument '\
-                            '"{}" in function {}, but found {}'.format(self.types, arg_name, self.func_name, type(obj)))
+                        '"{}" in function {}, but found {}'.format(self.types, 
+                                                                   arg_name, 
+                                                                   self.func_name, 
+                                                                   type(obj)))
         else:
             # *args goes here
             for count, obj in enumerate(self.objects):
                 if type(obj) not in self.types:
                     raise TypeError('Expected one of these types {} as argument '\
-                        'number {} in function {}, but found {}'.format(self.types, count, self.func_name, type(obj)))
+                        'number {} in function {}, but found {}'.format(self.types, 
+                                                                        count, 
+                                                                        self.func_name, 
+                                                                        type(obj)))
 
 
 # Selfdocumented, but might result
