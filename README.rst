@@ -6,26 +6,30 @@ Intro
 -----
 
 Typesys is a module that is meant to make it more easy to manage types.
-It contains three decorators; type_hints, type_corrector, and return_type.
+It contains four decorators; type_hints, type_corrector, and return_type and
+returns.
 
-The type_hints decorator lets the user specify what the arguements of
+The *type_hints* decorator lets the user specify what the arguements of
 a functions should be. If arguments of another type than specified in the
 decorator are passed in, a TypeError will be raised.
 
-The type_corrector decorator lets the user specify what types the 
+The *type_corrector* decorator lets the user specify what types the 
 arguments to a function should have, but not necessarily are passed in as,
 which means it allows some margin of error. It's not 100% safe to use as it
 still might result in a ValueError or TypeError if the user isn't careful enough.
 
-The return_type decorator lets the user specify what type the decoratred
+The *return_type decorator* lets the user specify what type the decoratred
 function should return. A TypeError will be raised if the function tries to 
-return a value of another type. 
+return a value of another type.
+
+The *returns* decorator lets the user specify what type a function's return type 
+has to be (if possible to return this a value of this type). 
 
 The motivation behing this module was to abstract some of the type checking and
 type casting to a higher level. I wanted to find a way that makes it easier
 for the programmer to see what types the arguments should be, what a type
-a function should return, and at the same time allow some margin of error (in
-case of type_corrector).
+a function should return or must return, and at the same time allow some margin 
+of error (in case of type_corrector).
 I'm not sure whether this is a good idea or not, or if it's a good approach.
 It was mostly developed for fun while playing around with decorators.
 
@@ -43,7 +47,7 @@ First import the decorators from the typesys module:
 
 .. code:: python
 
-    from typesys import type_hints, type_corrector, return_type
+    from typesys import type_hints, type_corrector, return_type, returns
 
 Then you are ready to start decorating your functions.
 
@@ -192,6 +196,24 @@ The same applies for functions defined with \*args and/or \*\*kwargs
         z = kwargs.get('z')
         z = 1 if z is None else z
         return x * y * z
+
+
+returns
+'''''''
+
+Decorate your functions with the type your funcitons must return, as long as
+it's possible.
+
+.. code:: python
+
+    # returns x+y as a string
+    @returns(str)
+    def add(x,y):
+        return x+y
+   
+
+A call to ass(1,2) will return the number 3 as a string.
+
 
 Known issues
 ------------
