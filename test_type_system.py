@@ -1,6 +1,6 @@
 import unittest
 
-from typesys import type_corrector, type_hints, return_type
+from typesys import type_corrector, type_hints, return_type, returns
 
 
 ######################################################
@@ -183,6 +183,29 @@ class ReturnTypeTest(unittest.TestCase):
 
     def test_strict_add_error(self):
         self.assertRaises(TypeError, strict_ret_add(1,2.0))
+
+
+########################################################
+# Functions for testing the return corrector decorator #
+########################################################
+
+
+@returns(str)
+def returns_add(x,y):
+    return x+y
+
+
+######################################################
+# End return type test functions                     #
+######################################################
+
+
+class ReturnTypeCorrectorTest(unittest.TestCase):
+    def test_add(self):
+        self.assertEqual(returns_add(1,2), '3')
+
+    def test_add_type(self):
+        self.assertEqual(type(returns_add(1,2)), str)
 
 
 if __name__ == '__main__':
