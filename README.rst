@@ -212,7 +212,7 @@ it's possible.
         return x+y
    
 
-A call to ass(1,2) will return the number 3 as a string.
+A call to add(1,2) will return the number 3 as a string.
 
 
 Known issues
