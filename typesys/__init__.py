@@ -5,9 +5,10 @@ Typesys
 
 Typesys is a module that is meant to make it more easy to manage types.
 It contains three decorators; type_hints, type_corrector, and return_type.
+For full documentation see https://pypi.python.org/pypi/typesys/.
 
 usage:
-    from typesys import type_hints, type_corrector, return_type
+    from typesys import type_hints, type_corrector, return_type, returns
     
     Type hint:
 
@@ -84,13 +85,21 @@ usage:
     def strict_add(x,y):
         return x+y
 
+
+    Returns
+
+    # returns x+y as a string
+    @returns(str)
+    def add(x,y):
+        return x+y
+
 """
 
 __title__ = 'typesys'
-__version__ = '0.2.7'
+__version__ = '0.2.8'
 __author__ = 'Fredrik Gjertsen'
 __licence__ = 'MIT'
 __copyright__ = 'Copyright 2015 Fredrik Gjertsen'
 
-from .type_system import type_corrector, type_hints, return_type
+from typesys.type_system import type_corrector, type_hints, return_type, returns
 
