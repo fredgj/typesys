@@ -24,7 +24,7 @@ class _TypeChecker(object):
     # Checks if an object is of the same type as the type passed in,
     # raises TypeError of not.
     def _check_type(self, obj, _type, arg_num=None, arg_name=None):
-        if type(obj) != _type:
+        if type(obj) is not _type:
             if arg_num:
                 raise TypeError('Expected {} as argument "{}" in function "{}" '\
                     ', but found {}'.format(_type, 
@@ -77,7 +77,7 @@ class _TypeChecker(object):
 # Selfdocumented, but might result
 # in a ValueError or TypeError.
 def _correct_type(obj, _type):
-    if type(obj) != _type:
+    if type(obj) is not _type:
         obj = _type(obj)
     return obj
 

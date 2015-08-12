@@ -96,7 +96,7 @@ usage:
 """
 
 __title__ = 'typesys'
-__version__ = '0.2.8'
+__version__ = '0.2.9'
 __author__ = 'Fredrik Gjertsen'
 __licence__ = 'MIT'
 __copyright__ = 'Copyright 2015 Fredrik Gjertsen'
