@@ -39,6 +39,8 @@ Installation
 
 pip install typesys
 
+or clone and run **python setup.py install**
+
 
 Usage
 -----
