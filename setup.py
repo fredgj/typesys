@@ -3,9 +3,10 @@ from setuptools import setup
 __author__ = 'Fredrik Gjertsen'
 __doc__ = open('README.rst').read()
 __description__ = 'typesys is a python module meant to make it easier to manange types'
+__version__ = '0.2.9'
 
 setup(name='typesys',
-      version='0.2.9',
+      version=__version__,
       description=__description__,
       long_description=__doc__,
       author=__author__,
