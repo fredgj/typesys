@@ -89,12 +89,9 @@ the examples below
     # Only accept integer arguments
     @type_hints(int)
     def mult(**kwargs):
-        x = kwargs.get('x')
-        x = 1 if x is None else x
-        y = kwargs.get('y')
-        y = 1 if y is None else y
-        z = kwargs.get('z')
-        z = 1 if z is None else z
+        x = kwargs.get('x', 1)
+        y = kwargs.get('y', 1)
+        z = kwargs.get('z', 1)
         return x * y * z
 
 
@@ -136,12 +133,9 @@ This decorator also works with \*args and \*\*kwargs
 
     @type_corrector(int)
     def mult(**kwargs):
-        x = kwargs.get('x')
-        x = 1 if x is None else x
-        y = kwargs.get('y')
-        y = 1 if y is None else y
-        z = kwargs.get('z')
-        z = 1 if z is None else z
+        x = kwargs.get('x', 1)
+        y = kwargs.get('y', 1)
+        z = kwargs.get('z', 1)
         return x * y * z   
 
 
@@ -194,12 +188,9 @@ The same applies for functions defined with \*args and/or \*\*kwargs
     # only accepts integers to be returned
     @return_type(int)
     def stric_kw_mult(**kwargs):
-        x = kwargs.get('x')
-        x = 1 if x is None else x
-        y = kwargs.get('y')
-        y = 1 if y is None else y
-        z = kwargs.get('z')
-        z = 1 if z is None else z
+        x = kwargs.get('x', 1)
+        y = kwargs.get('y', 1)
+        z = kwargs.get('z', 1)
         return x * y * z
 
 

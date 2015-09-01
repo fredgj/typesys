@@ -23,9 +23,9 @@ def mult(*numbers):
 
 @type_corrector(int)
 def kw_mult(**kwargs):
-    first = kwargs.get('first')
-    second = kwargs.get('second')
-    third = kwargs.get('third')
+    first = kwargs.get('first', 1)
+    second = kwargs.get('second', 1)
+    third = kwargs.get('third', 1)
     
     return first * second * third
 
@@ -105,9 +105,9 @@ def hint_mult(*numbers):
 
 @type_hints(int, float)
 def hint_kw_mult(**kwargs):
-    first = kwargs.get('first')
-    second = kwargs.get('second')
-    third = kwargs.get('third')    
+    first = kwargs.get('first', 1)
+    second = kwargs.get('second', 1)
+    third = kwargs.get('third', 1)    
     return first * second * third
 
 
